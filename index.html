@@ -8,14 +8,14 @@
         /* Define la fuente Heuristica */
         @font-face {
             font-family: 'Heuristica';
-            src: url('Heuristica-Regular.ttf') format('truetype'); /* Asegúrate de que el nombre del archivo sea correcto */
+            src: url('Heuristica-Regular.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Heuristica';
-            src: url('Heuristica-Bold.ttf') format('truetype'); /* Si tienes una versión bold */
+            src: url('Heuristica-Bold.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
         }
@@ -28,11 +28,16 @@
             font-style: normal;
         }
 
+        /*
+         * Ajustes clave para habilitar el scroll
+         * El body ya no tiene overflow: hidden. Solo se evita el scroll horizontal.
+         */
         body {
             margin: 0;
             font-family: 'Heuristica', sans-serif;
             color: #333;
             overflow-x: hidden; /* Evita el scroll horizontal */
+            background: #fff; /* Se elimina la imagen del body */
         }
 
         /* --- Animaciones de entrada --- */
@@ -97,7 +102,7 @@
             justify-content: space-between;
             align-items: center;
             animation: fadeInDown 0.8s ease-out forwards;
-            opacity: 0; /* Oculto inicialmente */
+            opacity: 0;
         }
 
         .header-main .logo {
@@ -106,11 +111,11 @@
             font-size: 1.5em;
             font-weight: bold;
             animation: fadeInLeft 0.8s ease-out 0.4s forwards;
-            opacity: 0; /* Oculto inicialmente */
+            opacity: 0;
         }
 
         .header-main .logo img {
-            height: 50px; /* Ajusta el tamaño del logo si es necesario */
+            height: 50px;
             margin-right: 10px;
         }
 
@@ -122,10 +127,9 @@
             gap: 25px;
             align-items: center;
             animation: fadeInRight 0.8s ease-out 0.6s forwards;
-            opacity: 0; /* Oculto inicialmente */
+            opacity: 0;
         }
 
-        /* Estilos para los separadores verticales automáticos */
         .header-main nav ul li:not(:nth-last-child(1)):not(:nth-last-child(2)):not(.menu-icon)::after {
             content: '│';
             color: #82a3bd;
@@ -136,10 +140,10 @@
         .header-main nav ul li a {
             text-decoration: none;
             color: white;
-            font-family: 'ProximaNova', sans-serif; /* Aplicar ProximaNova al menú visible */
+            font-family: 'ProximaNova', sans-serif;
             font-weight: normal;
             font-size: 1em;
-            white-space: nowrap; /* Evita que el texto se rompa */
+            white-space: nowrap;
         }
 
         .header-main nav ul li.menu-icon {
@@ -147,26 +151,24 @@
             cursor: pointer;
         }
 
+        /*
+         * La sección hero vuelve a tener la altura de 100vh.
+         * La imagen de fondo se aplica a esta sección.
+         */
         .hero-section {
             position: relative;
             width: 100%;
-            /* Altura fija para desktop, responsive para móviles */
-            height: 533px;
-            min-height: 533px;
+            height: 93vh; /* Ocupa el 100% de la altura de la pantalla */
             background: url('img/20250806_092322.jpg') no-repeat center center;
-            background-size: cover; /* Se ajusta mejor a la pantalla sin deformar */
-            background-position: center center;
-            background-attachment: fixed; /* Efecto parallax opcional */
-            background-color: #f5f5f5; /* Color de fondo para el espacio restante */
-            color: white;
+            background-size: cover; /* La imagen cubre el área completa */
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 5%; /* Ajuste para el texto a la izquierda */
+            padding-left: 5%;
             box-sizing: border-box;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sutil sombra para el texto */
-            animation: fadeIn 1.5s ease-out 0.8s forwards; /* La imagen de fondo aparece un poco más tarde y suave */
-            opacity: 0; /* Oculto inicialmente */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            animation: fadeIn 1.5s ease-out 0.8s forwards;
+            opacity: 0;
         }
 
         .hero-section::before {
@@ -176,45 +178,45 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0)); /* De más oscuro a transparente */
+            background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
             z-index: 1;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            animation: fadeInUp 1s ease-out 1.2s forwards; /* El contenido hero aparece más tarde */
-            opacity: 0; /* Oculto inicialmente */
+            animation: fadeInUp 1s ease-out 1.2s forwards;
+            opacity: 0;
         }
 
         .hero-content h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem); /* Texto responsive */
-            margin: 0 0 2px 0; /* Reducido el margen inferior de 0 a 5px */
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin: 0 0 2px 0;
             line-height: 1.1;
             font-weight: normal;
             color: white;
         }
 
         .hero-content p {
-            font-size: clamp(0.9rem, 2vw, 1.05rem); /* Texto responsive */
-            margin-top: 5px; /* Reducido de 10px a 5px */
-            max-width: min(500px, 90%); /* Ancho responsive */
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            margin-top: 5px;
+            max-width: min(500px, 90%);
             color: white;
             font-style: italic;
             display: flex;
             flex-direction: column;
-            gap: 8px; /* Reducido de 20px a 8px para acercar la flecha al texto */
+            gap: 8px;
             cursor: pointer;
         }
 
         .hero-arrow {
-            width: clamp(100px, 15vw, 145px); /* Flecha responsive */
+            width: clamp(100px, 15vw, 145px);
             height: 2px;
             background-color: white;
             position: relative;
             transition: width 0.8s ease;
             align-self: flex-start;
-            transform-origin: left; /* El punto de origen del estiramiento es desde la izquierda */
+            transform-origin: left;
         }
 
         .hero-arrow::after {
@@ -231,91 +233,31 @@
         }
 
         .hero-content p:hover .hero-arrow {
-            width: clamp(120px, 18vw, 165px); /* Se estira solo hacia la derecha aumentando el ancho */
+            width: clamp(120px, 18vw, 165px);
         }
 
         .hero-content p:hover .hero-arrow::after {
-            transform: scale(1.2); /* La punta también crece un poco */
+            transform: scale(1.2);
         }
-
-        /* --- Responsive breakpoints --- */
         
-        /* Para pantallas de tablet y móviles grandes */
-        @media screen and (max-width: 1024px) {
-            .hero-section {
-                height: 450px;
-                min-height: 450px;
-                padding-left: 4%;
-                background-attachment: scroll; /* Quitar parallax en tablets */
-            }
+        /* --- Estilos para la nueva sección --- */
+        .new-section {
+            background-color: #f5f5f5; /* Un color de fondo para distinguirla */
+            color: #333;
+            padding: 80px 5%;
+            text-align: center;
+            line-height: 1.6;
         }
 
-        /* Para pantallas de móviles */
-        @media screen and (max-width: 768px) {
-            .hero-section {
-                height: 400px;
-                min-height: 400px;
-                padding-left: 6%;
-                padding-right: 6%;
-                justify-content: center;
-                text-align: left;
-            }
-            
-            .hero-content h1 {
-                font-size: clamp(2.5rem, 10vw, 4rem);
-                line-height: 1.2;
-            }
-            
-            .hero-content p {
-                font-size: clamp(0.9rem, 3vw, 1.1rem);
-                max-width: 100%;
-            }
+        .new-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
-        /* Para móviles pequeños */
-        @media screen and (max-width: 480px) {
-            .hero-section {
-                height: 350px;
-                min-height: 350px;
-                padding-left: 5%;
-                padding-right: 5%;
-            }
-            
-            .hero-content h1 {
-                font-size: clamp(2rem, 12vw, 3.5rem);
-                margin-bottom: 10px;
-            }
-            
-            .hero-content p {
-                font-size: clamp(0.8rem, 4vw, 1rem);
-                gap: 12px;
-            }
-            
-            .hero-arrow {
-                width: clamp(80px, 20vw, 120px);
-            }
-            
-            .hero-content p:hover .hero-arrow {
-                width: clamp(100px, 25vw, 140px);
-            }
-        }
-
-        /* Para pantallas muy pequeñas */
-        @media screen and (max-width: 360px) {
-            .hero-section {
-                height: 300px;
-                min-height: 300px;
-                padding-left: 4%;
-                padding-right: 4%;
-            }
-        }
-
-        /* Para pantallas muy grandes - mantener proporción similar */
-        @media screen and (min-width: 1920px) {
-            .hero-section {
-                height: 600px;
-                min-height: 600px;
-            }
+        .new-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         /* --- Menú desplegable --- */
@@ -385,7 +327,7 @@
 
         .menu-section h3 {
             color: white;
-            font-family: 'ProximaNova', sans-serif; /* Aplicar ProximaNova a los títulos del menú desplegable */
+            font-family: 'ProximaNova', sans-serif;
             font-size: 1.4em;
             margin: 0 0 20px 0;
             font-weight: bold;
@@ -406,7 +348,7 @@
         .menu-section ul li a {
             color: white;
             text-decoration: none;
-            font-family: 'ProximaNova', sans-serif; /* Aplicar ProximaNova a los enlaces del menú desplegable */
+            font-family: 'ProximaNova', sans-serif;
             font-size: 1em;
             transition: color 0.2s ease;
             background: none;
@@ -436,7 +378,8 @@
 <body>
 
     <header>
-        <div class="header-main"> <div class="logo">
+        <div class="header-main">
+            <div class="logo">
                 <img src=img/logo.png alt="Logo INSM">
                 Instituto Nuestra Señora de la Merced
             </div>
@@ -451,7 +394,6 @@
         </div>
     </header>
 
-    <!-- Menú desplegable -->
     <div class="dropdown-menu" id="dropdownMenu">
         <div class="dropdown-header">
             <div class="logo">
@@ -547,6 +489,11 @@
                 <p>Discover why families choose Culford<span class="hero-arrow"></span></p>
             </div>
         </section>
+
+        <section class="new-section">
+            <h2>Nuestra Misión y Valores</h2>
+            <p>En el Instituto Nuestra Señora de la Merced, nos dedicamos a formar líderes comprometidos con el servicio a la comunidad. Fomentamos la excelencia académica, el pensamiento crítico y el desarrollo integral de cada estudiante, preparándolos para los desafíos del futuro.</p>
+        </section>
     </main>
 
     <script>
@@ -555,7 +502,6 @@
             menu.classList.toggle('show');
         }
 
-        // Cerrar menú con tecla Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const menu = document.getElementById('dropdownMenu');
@@ -564,5 +510,4 @@
         });
     </script>
 </body>
-
 </html>
