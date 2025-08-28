@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Insm - Contacto</title>
+        <style>
+            /* --- Fuentes (requiere los archivos .ttf en la misma carpeta) --- */
+            @font-face {
+                font-family: 'Heuristica';
+                src: url('Heuristica-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'ProximaNova';
+                src: url('ProximaNova-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            /* --- Animaciones de entrada --- */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* --- Estilos Generales --- */
+            body {
+                margin: 0;
+                font-family: 'Heuristica', serif;
+                color: #333;
+                background-color: #f8f9fa;
+                overflow-x: hidden;
+            }
+
+            /* --- Header --- */
+            .header-main {
+                background-color: rgba(26, 79, 141, 0.25); /* Fondo 75% transparente */
+                backdrop-filter: blur(5px); /* Efecto de desenfoque para mejor legibilidad */
+                -webkit-backdrop-filter: blur(5px); /* Soporte para Safari */
+                color: white;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed; /* Cambiado de absolute a fixed */
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Sutil borde inferior */
+                transition: all 0.3s ease; /* Transición suave para cambios */
+            }
+            .header-main .logo {
+                display: flex;
+                align-items: center;
+                font-size: 1.5em;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
+            }
+            .header-main .logo a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                transition: none; /* Sin transiciones para el logo */
+            }
+            .header-main .logo a:hover {
+                color: white; /* Mantiene el color original */
+            }
+            .header-main .logo img {
+                height: 50px;
+                margin-right: 10px;
+            }
+            .header-main nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 25px;
+                align-items: center;
+            }
+            .header-main nav ul li:not(:last-child)::after {
+                content: '│';
+                color: rgba(130, 163, 189, 0.8);
+                margin-left: 25px;
+                font-weight: bold;
+            }
+            .header-main nav ul li a {
+                text-decoration: none;
+                color: white;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
+                transition: color 0.3s ease;
+                position: relative;
+                padding-bottom: 5px;
+            }
+            /* Animación de línea inferior para enlaces del menú */
+            .header-main nav ul li:not(:last-child) a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            .header-main nav ul li:not(:last-child) a:hover::after {
+                transform: scaleX(1);
+            }
+            .header-main nav ul li a:hover {
+                color: #f39c12;
+            }
+            .header-main .menu-icon {
+                font-size: 1.3em;
+                cursor: pointer;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+
+            /* --- Footer --- */
+            .footer {
+                background-color: #cf0621;
+                color: #ffffff;
+                padding: 80px 40px 20px 40px;
+                font-family: 'ProximaNova', sans-serif;
+                position: relative;
+            }
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                max-width: 1300px;
+                margin: 0 auto;
+                gap: 40px;
+            }
+            .footer-column {
+                flex: 1;
+            }
+            .footer-column:last-child {
+                flex: 1.5; /* El mapa ocupa más espacio */
+                padding-left: 40px;
+            }
+            .footer-column h3 {
+                color: #f39c12;
+                font-size: 1.2em;
+                margin-bottom: 25px;
+                position: relative;
+                font-weight: normal;
+                font-family: 'Heuristica', serif;
+            }
+            .footer-column h3::after {
+                content: '';
+                display: block;
+                width: 50px;
+                height: 2px;
+                background-color: #cf0621;
+                margin-top: 8px;
+            }
+            .footer-column ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .footer-column ul li {
+                margin-bottom: 15px;
+            }
+            .footer-column ul li a {
+                color: #fff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            .footer-column ul li a:hover {
+                color: #fff;
+            }
+            .contact-info p {
+                margin: 0 0 10px 0;
+                line-height: 1.5;
+            }
+            .social-icons {
+                display: flex;
+                gap: 15px;
+                margin-top: 25px;
+            }
+            .social-icons a {
+                color: #f39c12;
+                font-size: 1.5em;
+                transition: color 0.3s ease;
+            }
+            .social-icons a:hover {
+                color: #fff;
+            }
+            .footer-map-container {
+                position: relative;
+            }
+            .footer-map-container img {
+                width: 100%;
+                height: auto;
+            }
+            .get-directions {
+                margin-top: 20px;
+            }
+            .get-directions a {
+                display: inline-block;
+                padding: 12px 25px;
+                border: 1px solid #f39c12;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease, border-color 0.3s ease;
+            }
+            .get-directions a:hover {
+                background-color: #f39c12;
+                border-color: #f39c12;
+            }
+            .footer-bottom {
+                border-top: 1px solid #cf0621;
+                padding-top: 20px;
+                margin-top: 50px;
+                text-align: center;
+                font-size: 0.9em;
+            }
+            .footer-bottom-links a {
+                color: #f39c12;
+                margin: 0 10px;
+                text-decoration: none;
+            }
+            .footer-bottom-links a:hover {
+                text-decoration: underline;
+            }
+            .footer-bottom-logos {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin-top: 10px;
+            }
+            .footer-bottom-logos img {
+                height: 40px;
+                filter: grayscale(100%);
+                opacity: 0.6;
+            }
+            .go-to-top {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                color: #fff;
+                text-decoration: none;
+                font-family: 'ProximaNova', sans-serif;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                transition: color 0.3s ease;
+            }
+            .go-to-top:hover {
+                color: #fff;
+                transform: translateY(-2px);
+            }
+            .go-to-top-icon {
+                background-color: #f39c12;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background-color 0.3s ease;
+                size: 40px;
+            }
+            .go-to-top-icon:hover {
+                background-color: #fff;
+                color: #f39c12;
+                transform: translateY(-3px);
+            }
+            /* --- Hero Section para Contacto (Estilos actualizados) --- */
+            .contact-hero-section {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                background: url('https://insm.vercel.app/img/20250806_092322.jpg') no-repeat center center;
+                background-size: cover;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 8%;
+                box-sizing: border-box;
+                color: white;
+            }
+            .contact-hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, rgba(70, 68, 68, 0.5), rgba(0, 0, 0, 0));
+                z-index: 1;
+            }
+            .contact-hero-content {
+                position: relative;
+                z-index: 2;
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+                /* Animación añadida */
+                animation: fadeInUp 1s ease-out 1.2s forwards;
+                opacity: 0;
+            }
+            .contact-hero-content h1 {
+                font-size: 5.5em;
+                margin: 0 0 2px 0;
+                line-height: 1.1;
+                font-weight: normal;
+            }
+            .contact-hero-content p {
+                font-size: 1.05em;
+                margin-top: 5px;
+                max-width: 500px;
+                color: white;
+                font-style: italic;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                cursor: pointer;
+            }
+
+            /* Estilos para la flecha animada */
+            .hero-arrow {
+                width: 145px;
+                height: 2px;
+                background-color: white;
+                position: relative;
+                transition: width 0.8s ease;
+                align-self: flex-start;
+                transform-origin: left;
+            }
+            .hero-arrow::after {
+                content: '';
+                position: absolute;
+                right: -8px;
+                top: -4px;
+                width: 0;
+                height: 0;
+                border-left: 10px solid white;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                transition: transform 0.3s ease;
+            }
+            .contact-hero-content p:hover .hero-arrow {
+                width: 165px;
+            }
+            .contact-hero-content p:hover .hero-arrow::after {
+                transform: scale(1.2);
+            }
+
+            /* --- Sección Principal de Contacto --- */
+            .contact-main-section {
+                padding: 80px 40px;
+                background-color: #ffffff;
+            }
+            .contact-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1.5fr; /* Columna de info y columna de formulario */
+                gap: 60px;
+                align-items: flex-start;
+            }
+
+            /* --- Columna de Información --- */
+            .contact-info-col h2 {
+                font-family: 'Heuristica', serif;
+                font-size: 2.5em;
+                color: #cf0621;
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-weight: normal;
+            }
+            .contact-info-col p {
+                font-family: 'ProximaNova', sans-serif;
+                line-height: 1.7;
+                color: #555;
+            }
+            .contact-details {
+                margin-top: 30px;
+                font-family: 'ProximaNova', sans-serif;
+            }
+            .contact-details .detail-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                font-size: 1.1em;
+            }
+            .contact-details .detail-item i {
+                font-size: 1.5em;
+                color: #cf0621;
+                margin-right: 20px;
+                width: 30px; /* Ancho fijo para alinear los íconos */
+                text-align: center;
+            }
+            .contact-details .detail-item a {
+                color: #333;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+            .contact-details .detail-item a:hover {
+                color: #cf0621;
+            }
+
+            /* --- Columna del Formulario --- */
+            .contact-form-col {
+                background-color: #f8f9fa;
+                padding: 40px;
+                border-radius: 8px;
+                border: 1px solid #e0e0e0;
+            }
+            .contact-form-col h2 {
+                font-family: 'Heuristica', serif;
+                font-size: 2.5em;
+                color: #cf0621;
+                margin-top: 0;
+                margin-bottom: 30px;
+                font-weight: normal;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .form-group label {
+                display: block;
+                font-family: 'ProximaNova', sans-serif;
+                margin-bottom: 8px;
+                color: #555;
+                font-weight: bold;
+            }
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1em;
+                box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+            }
+            .form-group textarea {
+                resize: vertical;
+                min-height: 120px;
+            }
+            .submit-btn {
+                display: inline-block;
+                background-color: #cf0621;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                font-family: 'ProximaNova', sans-serif;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .submit-btn:hover {
+                background-color: #a7051a;
+            }
+
+            /* --- Sección del Mapa --- */
+            .map-section {
+                padding: 0 40px 80px 40px;
+            }
+            .map-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                height: 450px;
+                border-radius: 8px;
+                overflow: hidden;
+                border: 1px solid #e0e0e0;
+            }
+            .map-container iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
+            /* --- Footer (reutilizado) --- */
+            .footer {
+                background-color: #cf0621;
+                color: #ffffff;
+                padding: 80px 40px 20px 40px;
+                font-family: 'ProximaNova', sans-serif;
+            }
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                max-width: 1300px;
+                margin: 0 auto;
+            }
+            /* (Resto de los estilos del footer que ya tienes) */
+
+
+            /* --- Responsive Design --- */
+            @media (max-width: 992px) {
+                .contact-container {
+                    grid-template-columns: 1fr; /* Una columna en tablets */
+                }
+                .contact-hero-content h1 {
+                    font-size: 4em;
+                }
+            }
+            @media (max-width: 768px) {
+                 .header-main nav ul li:not(:last-child) {
+                    display: none;
+                }
+                .contact-main-section, .map-section {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+                .contact-hero-content h1 {
+                    font-size: 3.5em;
+                }
+            }
+
+        </style>
+        <link rel="icon" href="img/favicon.ico" type="image/ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    </head>
+    <body>
+        <!-- Header reutilizado -->
+        <header>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="https://insm.vercel.app/img/favicon.ico" alt="Logo INSM" />
+                        <span>Instituto Nuestra Señora de la Merced</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="NuestroColegio.html">Nuestro Colegio</a></li>
+                        <li><a href="index.html#noticias">Proyectos</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                        <li class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="contact-hero-section">
+                <div class="contact-hero-content">
+                    <h1>Ven<br />contactanos</h1>
+                    <p>Formulario de Consultas<span class="hero-arrow"></span></p>
+                </div>
+            </section>
+
+            <section class="contact-main-section">
+                <div class="contact-container">
+                    <div class="contact-info-col">
+                        <h2>Información de Contacto</h2>
+                        <p>Si tienes alguna pregunta o deseas obtener más información sobre nuestras admisiones, programas académicos o cualquier otro aspecto del colegio, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte.</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>9 de Julio 465, Arroyito, Córdoba</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <a href="tel:+543576422333">+54 (3576) 421-440</a>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@insm.edu.ar">info@insm.edu.ar</a>
+                            </div>
+                             <div class="detail-item">
+                                <i class="fas fa-globe"></i>
+                                <a href="https://insm.vercel.app/" target="_blank" rel="noopener noreferrer">insm.vercel.app</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-col">
+                        <h2>Envíanos un Mensaje</h2>
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="name">Nombre Completo</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Asunto</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensaje</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="map-section">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3407.593353494241!2d-63.0524458848527!3d-31.42555598142801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9434b7d3b1e3e3e7%3A0x6c2935b5a2558f6c!2sInstituto%20Nuestra%20Se%C3%B1ora%20de%20la%20Merced!5e0!3m2!1ses-419!2sar!4v1661544277881!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <a href="#" onclick="scrollToTopSmooth(); return false;" class="go-to-top">
+                Ir Arriba
+                <span class="go-to-top-icon">↑</span>
+            </a>
+            <div class="footer-container">
+                <div class="footer-column contact-info">
+                    <h3>Contactanos</h3>
+                    <p>
+                        <strong>Arroyito,</strong><br />
+                        Córdoba, 2434
+                    </p>
+                    <p>
+                        <strong>Escuela Principal:</strong> +54 (3576) 421-440
+                    </p>
+                    <p>
+                        <strong>Administración:</strong> +54 (3576) 408-967
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Útiles</h3>
+                    <ul>
+                        <li><a href="Contacto.html">Hacer una consulta</a></li>
+                        <li><a href="#">Trabaja con Nosotros</a></li>
+                        <li><a href="#">Centro deportivo</a></li>
+                        <li><a href="#">Alquiler de Instalaciones</a></li>
+                        <li><a href="#">Terminos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Encuentranos</h3>
+                    <p>
+                        Ubicado en el corazón de Arroyito, Córdoba (9 de Julio 465), el Instituto Nuestra Señora de la Merced combina tradición mercedaria con una propuesta educativa moderna.
+                    </p>
+                    <div class="get-directions">
+                        <a href="#">Obtener Direcciones</a>
+                    </div>
+                    <div class="footer-map-container"></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-links">
+                    <span>© 1985 Instituto Insm</span>
+                    <span>|</span>
+                    <a href="#">Políticas & Manuales</a>
+                    <span>|</span>
+                    <a href="#">Privacidad</a>
+                    <span>|</span>
+                    <a href="#">Cookies</a>
+                </div>
+                <div class="footer-bottom-logos">
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            function toggleMenu() {
+                // Lógica para el menú desplegable si la tienes
+            }
+
+            function scrollToTopSmooth() {
+                const startPosition = window.pageYOffset;
+                const duration = 3000;
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    const easeInOutQuad = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    window.scrollTo(0, startPosition * (1 - easeInOutQuad));
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+                requestAnimationFrame(animation);
+            }
+        </script>
+    </body>
+</html>
